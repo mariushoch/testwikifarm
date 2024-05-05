@@ -36,7 +36,6 @@ mw docker mediawiki install --dbtype mysql --dbname=wikidatawiki
 # Do the CentralAuth migrations:
 
 mw docker mediawiki foreachwiki CentralAuth:migratePass0
-mw docker mediawiki foreachwiki CentralAuth:migratePass1
 
 # Wikibase set up:
 

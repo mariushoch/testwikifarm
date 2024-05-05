@@ -42,11 +42,11 @@ teardown() {
 	mw docker mediawiki foreachwiki runJobs
 	mw docker mediawiki foreachwiki runJobs
 
-	run sh -c "curl -s --fail 'http://dewiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2' | jq '.query.pages[].langlinks[].lang'"
-	[[ "$output" == '"en"' ]]
+	run curl -s --fail 'http://dewiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2'
+	[[ "$(jq '.query.pages[].langlinks[].lang' <<< "$output")" == '"en"' ]]
 	[ "$status" -eq 0 ]
 
-	run sh -c "curl -s --fail 'http://newiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2' | jq '.query.pages[].langlinks[].lang'"
-	[[ "$output" == '"de"' ]]
+	run curl -s --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2'
+	[[ "$(jq '.query.pages[].langlinks[].lang' <<< "$output")" == '"de"' ]]
 	[ "$status" -eq 0 ]
 }

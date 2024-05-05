@@ -1,19 +1,23 @@
 #!/bin/bash
 
 set -x
+set -e
 
-# Basic set up:
+# Create the MySQL container
 
-mw docker mysql create
+mw docker mysql create --no-interaction
+
+# Download extensions and skins
+
+mw docker mediawiki get-code --skin Vector || true
+mw docker mediawiki get-code --extension AntiSpoof || true
+mw docker mediawiki get-code --extension CentralAuth || true
+mw docker mediawiki get-code --extension Wikibase || true
+mw docker mediawiki get-code --extension WikibaseLexeme || true
+
+# Create the MediaWiki container
+
 mw docker mediawiki create --no-interaction
-
-# Download further extensions
-
-mw docker mediawiki exec -- test -d /var/www/html/w/skins/Vector || mw docker mediawiki get-code --skin Vector
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/AntiSpoof || mw docker mediawiki get-code --extension AntiSpoof
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/CentralAuth || mw docker mediawiki get-code --extension CentralAuth
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/Wikibase || mw docker mediawiki get-code --extension Wikibase
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/WikibaseLexeme || mw docker mediawiki get-code --extension WikibaseLexeme
 
 # Create the CentralAuth database and tables:
 mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306

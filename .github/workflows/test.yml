@@ -9,16 +9,16 @@ jobs:
       - name: Install shellcheck
         run: sudo apt-get -y install shellcheck
       - name: Run shellcheck
-        run: shellcheck *.sh test/*.sh
+        run: shellcheck *.sh test/*.sh test/*.bats
   run_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install compose
-        run: sudo apt-get -y install composer
+      - name: Install composer, bats
+        run: sudo apt-get -y install composer bats
       - name: Do pre-test set up
         run: sudo bash test/pre-setup.sh
       - name: Create the setup
         run: sudo bash setup.sh
       - name: Run smoke tests
-        run: bash test/tests.sh
+        run: bats test/tests.bats

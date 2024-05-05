@@ -21,4 +21,4 @@ jobs:
       - name: Create the setup
         run: sudo bash setup.sh
       - name: Run smoke tests
-        run: bats test/tests.bats
+        run: sudo bats test/tests.bats

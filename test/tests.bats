@@ -34,3 +34,19 @@ teardown() {
 	[[ "$output" == "dewiki-enwiki-metawiki-wikidatawiki" ]]
 	[ "$status" -eq 0 ]
 }
+@test "Wikibase site links" {
+	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "EN"
+	mw wiki page put --wiki http://dewiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "DE"
+	python "$BATS_TEST_DIRNAME"/link_en_de_berlin.py
+
+	mw docker mediawiki foreachwiki runJobs
+	mw docker mediawiki foreachwiki runJobs
+
+	run sh -c "curl 'http://dewiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2' | jq '.query.pages[].langlinks[].lang'"
+	[[ "$output" == '"en"' ]]
+	[ "$status" -eq 0 ]
+
+	run sh -c "curl 'http://newiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2' | jq '.query.pages[].langlinks[].lang'"
+	[[ "$output" == '"de"' ]]
+	[ "$status" -eq 0 ]
+}

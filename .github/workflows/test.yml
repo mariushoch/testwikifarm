@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install composer, bats
-        run: sudo apt-get -y install composer bats jq
+        run: sudo apt-get -y install composer bats jq python3-mwclient
       - name: Do pre-test set up
         run: sudo bash test/pre-setup.sh
       - name: Create the setup

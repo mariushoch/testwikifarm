@@ -18,7 +18,8 @@ mw docker mediawiki get-code --extension WikibaseLexeme || true
 
 mw docker mediawiki create --no-interaction
 mw docker mediawiki exec -- test -f /var/www/html/w/composer.local.json || mw docker mediawiki exec -- cp /var/www/html/w/composer.local.json-sample /var/www/html/w/composer.local.json
-mw docker mediawiki composer update
+#mw docker mediawiki composer update # Broken, complains about missing $HOME
+mw docker mediawiki exec -- env HOME=/root composer update
 
 # Create the CentralAuth database and tables:
 mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306
@@ -37,6 +38,7 @@ mw docker mediawiki install --dbtype mysql --dbname=wikidatawiki
 # Do the CentralAuth migrations:
 
 mw docker mediawiki foreachwiki CentralAuth:migratePass0
+mw docker mediawiki mwscript CentralAuth:migratePass1 -- --wiki metawiki # This only needs to run once
 
 # Wikibase set up:
 

@@ -18,3 +18,4 @@ cd /srv/mediawiki
 ln -s ./extensions/testwikifarm/LocalSettings.php .
 
 mw config set telemetry false --no-interaction
+mw docker env set MEDIAWIKI_VOLUMES_CODE /srv/mediawiki

@@ -3,8 +3,6 @@
 set -x
 set -e
 
-mw docker env set MEDIAWIKI_VOLUMES_CODE "$(pwd)"
-
 # Create the MySQL container
 
 mw docker mysql create --no-interaction

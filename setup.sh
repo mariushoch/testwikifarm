@@ -17,6 +17,7 @@ mw docker mediawiki get-code --extension WikibaseLexeme || true
 # Create the MediaWiki container
 
 mw docker mediawiki create --no-interaction
+mw docker mediawiki composer update
 
 # Create the CentralAuth database and tables:
 mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306

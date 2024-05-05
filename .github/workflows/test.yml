@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install compose
+        run: sudo apt-get -y install composer
       - name: Do pre-test set up
         run: sudo bash test/pre-setup.sh
       - name: Create the setup

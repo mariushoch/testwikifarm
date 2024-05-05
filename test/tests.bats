@@ -18,13 +18,19 @@ teardown() {
 @test "mw docker mediawiki doctor" {
 	mw docker mediawiki doctor
 }
-@test "mw docker mediawiki foreachwiki runJobs" {
-	mw docker mediawiki foreachwiki runJobs
-}
 @test "Edit an enwiki page" {
 	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "BeRLiN"
 
 	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/Berlin'
 	[[ "$output" =~ BeRLiN ]]
+	[ "$status" -eq 0 ]
+}
+@test "mw docker mediawiki foreachwiki runJobs" {
+	mw docker mediawiki foreachwiki runJobs
+}
+@test "CentralAuth" {
+	# Note: This requires a successful login to "Admin"
+	run sh -c "curl -s --fail 'http://dewiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&meta=globaluserinfo&guiuser=Admin&format=json&guiprop=merged' | jq -r '.query.globaluserinfo.merged[].wiki' | sort | paste -s -d -"
+	[[ "$output" == "dewiki-enwiki-metawiki-wikidatawiki" ]]
 	[ "$status" -eq 0 ]
 }

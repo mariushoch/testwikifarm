@@ -17,6 +17,7 @@ if ( $wgDBname === 'dewiki' ) {
  */
 wfLoadExtension('CentralAuth');
 $wgCentralAuthAutoMigrate = true;
+$wgCentralAuthAutoMigrateNonGlobalAccounts = true;
 $wgCentralAuthCookies = true;
 $wgCentralAuthDatabase = 'centralauth';
 $wgVirtualDomainsMapping['virtual-centralauth'] = [ 'db' => $wgCentralAuthDatabase ];

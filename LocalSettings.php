@@ -19,6 +19,7 @@ wfLoadExtension('CentralAuth');
 $wgCentralAuthAutoMigrate = true;
 $wgCentralAuthCookies = true;
 $wgCentralAuthDatabase = 'centralauth';
+$wgVirtualDomainsMapping['virtual-centralauth'] = [ 'db' => $wgCentralAuthDatabase ];
 $wgSharedDB = 'centralauth';
 $wgSharedTables = [ 'objectcache' ];
 $wgCentralAuthSessionCacheType = CACHE_DB;

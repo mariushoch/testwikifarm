@@ -16,3 +16,5 @@ cp -r testwikifarm /srv/mediawiki/extensions/
 
 cd /srv/mediawiki
 ln -s ./extensions/testwikifarm/LocalSettings.php .
+
+mw config set telemetry false --no-interaction

@@ -1,10 +1,11 @@
 #!/bin/bash
 
+set -x
 
 # Basic set up:
 
 mw docker mysql create
-mw docker mediawiki create
+mw docker mediawiki create --no-interaction
 
 # Download further extensions
 

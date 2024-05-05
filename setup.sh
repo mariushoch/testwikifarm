@@ -1,14 +1,17 @@
 #!/bin/bash
 
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/AntiSpoof || mw docker mediawiki get-code --extension AntiSpoof
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/CentralAuth || mw docker mediawiki get-code --extension CentralAuth
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/Wikibase || mw docker mediawiki get-code --extension Wikibase
-mw docker mediawiki exec -- test -d /var/www/html/w/extensions/WikibaseLexeme || mw docker mediawiki get-code --extension WikibaseLexeme
 
 # Basic set up:
 
 mw docker mysql create
 mw docker mediawiki create
+
+# Download further extensions
+
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/AntiSpoof || mw docker mediawiki get-code --extension AntiSpoof
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/CentralAuth || mw docker mediawiki get-code --extension CentralAuth
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/Wikibase || mw docker mediawiki get-code --extension Wikibase
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/WikibaseLexeme || mw docker mediawiki get-code --extension WikibaseLexeme
 
 # Create the CentralAuth database and tables:
 mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306

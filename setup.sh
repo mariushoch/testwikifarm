@@ -8,6 +8,7 @@ mw docker mediawiki create
 
 # Download further extensions
 
+mw docker mediawiki exec -- test -d /var/www/html/w/skins/Vector || mw docker mediawiki get-code --skin Vector
 mw docker mediawiki exec -- test -d /var/www/html/w/extensions/AntiSpoof || mw docker mediawiki get-code --extension AntiSpoof
 mw docker mediawiki exec -- test -d /var/www/html/w/extensions/CentralAuth || mw docker mediawiki get-code --extension CentralAuth
 mw docker mediawiki exec -- test -d /var/www/html/w/extensions/Wikibase || mw docker mediawiki get-code --extension Wikibase

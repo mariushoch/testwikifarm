@@ -17,6 +17,7 @@ mw docker mediawiki get-code --extension WikibaseLexeme || true
 # Create the MediaWiki container
 
 mw docker mediawiki create --no-interaction
+mw docker mediawiki exec -- test -f /var/www/html/w/composer.local.json || mw docker mediawiki exec -- cp /var/www/html/w/composer.local.json-sample /var/www/html/w/composer.local.json
 mw docker mediawiki composer update
 
 # Create the CentralAuth database and tables:

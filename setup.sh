@@ -1,5 +1,10 @@
 #!/bin/bash
 
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/AntiSpoof || mw docker mediawiki get-code --extension AntiSpoof
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/CentralAuth || mw docker mediawiki get-code --extension CentralAuth
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/Wikibase || mw docker mediawiki get-code --extension Wikibase
+mw docker mediawiki exec -- test -d /var/www/html/w/extensions/WikibaseLexeme || mw docker mediawiki get-code --extension WikibaseLexeme
+
 # Basic set up:
 
 mw docker mysql create

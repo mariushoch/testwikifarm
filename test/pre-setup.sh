@@ -16,4 +16,3 @@ cp -r testwikifarm /srv/mediawiki/extensions/
 
 cd /srv/mediawiki
 ln -s ./extensions/testwikifarm/LocalSettings.php .
-mw docker mediawiki create --no-interaction

@@ -13,6 +13,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension CentralAuth || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Wikibase || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseLexeme || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension EntitySchema || true
 
 # Create the MediaWiki container
 

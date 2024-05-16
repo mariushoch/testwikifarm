@@ -95,3 +95,4 @@ $entitySources = [
 ];
 $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
+wfLoadExtension( 'EntitySchema' );

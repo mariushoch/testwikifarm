@@ -4,6 +4,7 @@ require_once '/mwdd/MwddSettings.php';
 $wgDebugToolbar = true;
 require_once "$IP/includes/DevelopmentSettings.php";
 error_reporting( ~E_DEPRECATED );
+$wgMainCacheType = CACHE_MEMCACHED;
 
 wfLoadSkin('Vector');
 wfLoadExtension('AntiSpoof');
@@ -21,9 +22,7 @@ $wgCentralAuthAutoMigrateNonGlobalAccounts = true;
 $wgCentralAuthCookies = true;
 $wgCentralAuthDatabase = 'centralauth';
 $wgVirtualDomainsMapping['virtual-centralauth'] = [ 'db' => $wgCentralAuthDatabase ];
-$wgSharedDB = 'centralauth';
-$wgSharedTables = [ 'objectcache' ];
-$wgCentralAuthSessionCacheType = CACHE_DB;
+$wgCentralAuthSessionCacheType = CACHE_MEMCACHED;
 $wgCentralAuthAutoLoginWikis = [
 	'dewiki.mediawiki.mwdd.localhost:8080' => 'dewiki',
 	'enwiki.mediawiki.mwdd.localhost:8080' => 'enwiki',

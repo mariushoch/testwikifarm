@@ -4,8 +4,10 @@ set -x
 set -e
 
 # Create the MySQL container
-
 mw docker mysql create --no-interaction
+
+# Create the Memcached container
+mw docker memcached create --no-interaction
 
 # Download extensions and skins
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --skin Vector || true
@@ -15,8 +17,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseLexeme || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension EntitySchema || true
 
-# Create the MediaWiki container
-
+# Create the MediaWiki container, run composer update
 mw docker mediawiki create --no-interaction
 mw docker mediawiki exec -- test -f /var/www/html/w/composer.local.json || mw docker mediawiki exec -- cp /var/www/html/w/composer.local.json-sample /var/www/html/w/composer.local.json
 mw docker mediawiki composer update
@@ -26,10 +27,11 @@ mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306
 mw docker mysql mysql -- -e 'CREATE DATABASE centralauth;'
 mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- cat /var/www/html/w/extensions/AntiSpoof/sql/mysql/tables-generated.sql)"
 mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- cat /var/www/html/w/extensions/CentralAuth/schema/mysql/tables-generated.sql)"
+
+# Create a central centralauth.objectcache table
 mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- grep -ozP '(?s)CREATE TABLE .{0,10}objectcache.*?;' /var/www/html/w/maintenance/tables-generated.sql | tr -d '\000' )"
 
-# To create the wikis:
-
+# Create the wikis:
 mw docker mediawiki install --dbtype mysql --dbname=dewiki
 mw docker mediawiki install --dbtype mysql --dbname=enwiki
 mw docker mediawiki install --dbtype mysql --dbname=metawiki

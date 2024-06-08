@@ -63,12 +63,12 @@ require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
 $wgWBClientSettings['siteGroup'] = 'wikipedia';
 
+wfLoadExtension( 'EntitySchema' );
+$wgEntitySchemaIsRepo = $wgDBname === $repoDatabase;
 if ( $wgDBname === $repoDatabase ) {
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
 	$wgWBClientSettings['siteGroup'] = 'wikidata';
-	// As of 2024-05 EntitySchema only works on repo (https://phabricator.wikimedia.org/T363153)
-	wfLoadExtension( 'EntitySchema' );
 } elseif ( $wgDBname === 'metawiki' ) {
 	$wgWBClientSettings['siteGroup'] = 'meta';
 }

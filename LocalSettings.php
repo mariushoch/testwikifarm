@@ -65,6 +65,7 @@ $wgWBClientSettings['siteGroup'] = 'wikipedia';
 
 wfLoadExtension( 'EntitySchema' );
 $wgEntitySchemaIsRepo = $wgDBname === $repoDatabase;
+$wgEntitySchemaEnableDatatype = true;
 if ( $wgDBname === $repoDatabase ) {
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";

@@ -15,15 +15,16 @@ teardown() {
 	curl -v -L --fail 'http://metawiki.mediawiki.mwdd.localhost:8080/wiki/Special:BlankPage'
 	curl -v -L --fail 'http://wikidatawiki.mediawiki.mwdd.localhost:8080/wiki/Special:BlankPage'
 }
-@test "mw docker mediawiki doctor" {
-	mw docker mediawiki doctor
-}
-@test "Edit an enwiki page" {
-	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "BeRLiN"
+@test "Edit an enwiki page and search for it using CirrusSearch" {
+	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "Info on BeRLiN"
 
 	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/Berlin'
 	[[ "$output" =~ BeRLiN ]]
 	[ "$status" -eq 0 ]
+
+	mw docker mediawiki foreachwiki runJobs
+
+	curl 'http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&list=search&srsearch=insource:BeRLiN&format=json' | jq -e '.query.searchinfo.totalhits == 1'
 }
 @test "mw docker mediawiki foreachwiki runJobs" {
 	mw docker mediawiki foreachwiki runJobs

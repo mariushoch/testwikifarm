@@ -9,6 +9,9 @@ mw docker mysql create --no-interaction
 # Create the Memcached container
 mw docker memcached create --no-interaction
 
+# Create the ElasticSearch container
+mw docker elasticsearch create --no-interaction
+
 # Download extensions and skins
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --skin Vector || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension AntiSpoof || true
@@ -16,6 +19,9 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Wikibase || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseLexeme || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension EntitySchema || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Elastica || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension CirrusSearch || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseCirrusSearch || true
 
 # Create the MediaWiki container, run composer update
 mw docker mediawiki create --no-interaction
@@ -38,12 +44,15 @@ mw docker mediawiki install --dbtype mysql --dbname=metawiki
 mw docker mediawiki install --dbtype mysql --dbname=wikidatawiki
 
 # Do the CentralAuth migrations:
-
 mw docker mediawiki foreachwiki CentralAuth:migratePass0
 mw docker mediawiki mwscript CentralAuth:migratePass1 -- --wiki metawiki # This only needs to run once
 
-# Wikibase set up:
+# Init the CirrusSearch indexes:
+mw docker mediawiki foreachwiki CirrusSearch:UpdateSearchIndexConfig
+mw docker mediawiki foreachwiki CirrusSearch:ForceSearchIndex.php -- --skipLinks --indexOnSkip
+mw docker mediawiki foreachwiki CirrusSearch:ForceSearchIndex.php -- --skipParse
 
+# Wikibase set up:
 mw docker mediawiki foreachwiki addSite -- --interwiki-id de --language de --pagepath "http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \
 	--filepath "http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1" dewiki wikipedia
 mw docker mediawiki foreachwiki addSite -- --interwiki-id en --language en --pagepath "http://enwiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \

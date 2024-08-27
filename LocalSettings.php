@@ -97,3 +97,15 @@ $entitySources = [
 ];
 $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
+
+if(gethostbyname('elasticsearch') !== 'elasticsearch') {
+	wfLoadExtension( 'Elastica' );
+	wfLoadExtension( 'CirrusSearch' );
+	$wgSearchType = 'CirrusSearch';
+	$wgWBCSUseCirrus = true;
+	$wgDBname === $repoDatabase && wfLoadExtension( 'WikibaseCirrusSearch' );
+	$wgWBRepoSettings['searchIndexTypes'] = function() {
+		// Try to index everything
+		return Wikibase\Repo\WikibaseRepo::getDataTypeFactory()->getTypeIds();
+	};
+}

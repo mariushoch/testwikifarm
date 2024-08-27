@@ -5,7 +5,7 @@ set -e
 
 cd ..
 
-curl 'https://gitlab.wikimedia.org/api/v4/projects/16/packages/generic/mwcli/v0.24.3/mw_v0.24.3_linux_amd64' > /usr/local/bin/mw
+curl 'https://gitlab.wikimedia.org/api/v4/projects/16/packages/generic/mwcli/v0.25.1/mw_v0.25.1_linux_amd64' > /usr/local/bin/mw
 chmod +x /usr/local/bin/mw
 
 git clone --depth 1 https://github.com/wikimedia/mediawiki.git /srv/mediawiki

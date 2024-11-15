@@ -79,6 +79,7 @@ $wgWBClientSettings['specialSiteLinkGroups'] = ['meta', 'wikidata'];
 $wgWBRepoSettings['siteLinkGroups'] = $wgWBClientSettings['siteLinkGroups'];
 $wgWBRepoSettings['specialSiteLinkGroups'] = $wgWBClientSettings['specialSiteLinkGroups'];
 $wgWBRepoSettings['localClientDatabases'] = array_combine( $wgLocalDatabases, $wgLocalDatabases );
+$wgWBRepoSettings['tmpEnableMulLanguageCode'] = true;
 $wgWBClientSettings['repoDatabase'] = $repoDatabase;
 $wgWBClientSettings['injectRecentChanges'] = true;
 $entitySources = [

@@ -35,7 +35,7 @@ mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -
 mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- cat /var/www/html/w/extensions/CentralAuth/schema/mysql/tables-generated.sql)"
 
 # Create a central centralauth.objectcache table
-mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- grep -ozP '(?s)CREATE TABLE .{0,10}objectcache.*?;' /var/www/html/w/maintenance/tables-generated.sql | tr -d '\000' )"
+mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- grep -ozP '(?s)CREATE TABLE .{0,10}objectcache.*?;' /var/www/html/w/sql/mysql/tables-generated.sql | tr -d '\000' )"
 
 # Create the wikis:
 mw docker mediawiki install --dbtype mysql --dbname=dewiki

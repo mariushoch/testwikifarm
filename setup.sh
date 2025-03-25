@@ -22,6 +22,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Elastica || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension CirrusSearch || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseCirrusSearch || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Scribunto || true
 
 # Create the MediaWiki container, run composer update
 mw docker mediawiki create --no-interaction

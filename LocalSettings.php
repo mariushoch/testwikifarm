@@ -8,6 +8,7 @@ $wgMainCacheType = CACHE_MEMCACHED;
 
 wfLoadSkin('Vector');
 wfLoadExtension('AntiSpoof');
+wfLoadExtension('Scribunto');
 
 if ( $wgDBname === 'dewiki' ) {
 	$wgLanguageCode = 'de';

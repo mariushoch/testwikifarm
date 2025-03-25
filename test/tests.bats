@@ -18,7 +18,7 @@ teardown() {
 @test "Edit an enwiki page and search for it using CirrusSearch" {
 	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Berlin <<< "Info on BeRLiN"
 
-	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/Berlin'
+	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/Berlin?action=render'
 	[[ "$output" =~ BeRLiN ]]
 	[ "$status" -eq 0 ]
 
@@ -49,5 +49,13 @@ teardown() {
 
 	run curl -s --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php?action=query&prop=langlinks&titles=Berlin&format=json&formatversion=2'
 	[[ "$(jq '.query.pages[].langlinks[].lang' <<< "$output")" == '"de"' ]]
+	[ "$status" -eq 0 ]
+}
+@test "Wikibase Scribunto" {
+	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title Module:WikibaseScribuntoTest \
+		<<< "return { wst = function() return 'BerlinID:' .. mw.wikibase.getEntityIdForTitle( 'Berlin' ) end }"
+	mw wiki page put --wiki http://enwiki.mediawiki.mwdd.localhost:8080/w/api.php --user admin --password mwddpassword --title WikibaseScribuntoTest <<< "{{#invoke:WikibaseScribuntoTest|wst}}"
+	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/WikibaseScribuntoTest?action=render'
+	[[ "$output" =~ BerlinID:Q[0-9]+ ]]
 	[ "$status" -eq 0 ]
 }

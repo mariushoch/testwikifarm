@@ -53,6 +53,9 @@ $wgConf->settings = [
 		'default' => $wgArticlePath,
 	],
 ];
+$wgCrossSiteAJAXdomains = [
+	'*.mediawiki.mwdd.localhost:8080'
+];
 
 /**
  * Wikibase

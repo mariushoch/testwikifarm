@@ -9,6 +9,6 @@ Clone MediaWiki and clone this repo into its extensions dir. Then create a relat
 ```bash
 export MW_SERVER=http://wikidatawiki.mediawiki.mwdd.localhost:8080/
 export MW_SCRIPT_PATH=/w
-export MEDIAWIKI_USER=admin
+export MEDIAWIKI_USER=Admin
 export MEDIAWIKI_PASSWORD=mwddpassword
 ```

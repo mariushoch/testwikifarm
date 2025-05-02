@@ -102,6 +102,7 @@ $entitySources = [
 ];
 $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
+$wgLexemeEnableDataTransclusion = true;
 
 if(gethostbyname('elasticsearch') !== 'elasticsearch') {
 	wfLoadExtension( 'Elastica' );

@@ -59,3 +59,9 @@ teardown() {
 	[[ "$output" =~ BerlinID:Q[0-9]+ ]]
 	[ "$status" -eq 0 ]
 }
+@test "Test mobile mode" {
+	run curl -v -L --fail 'http://enwiki.mediawiki.mwdd.localhost:8080/wiki/Special:BlankPage?useformat=mobile'
+	[ "$status" -eq 0 ]
+	[[ "$output" =~ Special:MobileOptions ]]
+	[[ "$output" =~ class=\"[^\"]*skin-minerva ]]
+}

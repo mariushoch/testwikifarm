@@ -13,6 +13,7 @@ mw docker memcached create --no-interaction
 mw docker elasticsearch create --no-interaction
 
 # Download extensions and skins
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --skin MinervaNeue || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --skin Vector || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension AntiSpoof || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension CentralAuth || true
@@ -23,6 +24,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension CirrusSearch || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseCirrusSearch || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Scribunto || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension MobileFrontend || true
 
 # Create the MediaWiki container, run composer update
 mw docker mediawiki create --no-interaction

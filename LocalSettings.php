@@ -7,8 +7,10 @@ error_reporting( ~E_DEPRECATED );
 $wgMainCacheType = CACHE_MEMCACHED;
 
 wfLoadSkin('Vector');
+wfLoadSkin( 'MinervaNeue' );
 wfLoadExtension('AntiSpoof');
 wfLoadExtension('Scribunto');
+wfLoadExtension( 'MobileFrontend' );
 
 if ( $wgDBname === 'dewiki' ) {
 	$wgLanguageCode = 'de';

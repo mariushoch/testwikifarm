@@ -65,3 +65,15 @@ teardown() {
 	[[ "$output" =~ Special:MobileOptions ]]
 	[[ "$output" =~ class=\"[^\"]*skin-minerva ]]
 }
+@test "Test wikibase-cli integration" {
+	local label="Test wikibase-cli #$RANDOM"
+	run "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity '{ "type": "property", "datatype": "string", "labels": { "en": "'"$label"'" } }'
+
+	[ "$status" -eq 0 ]
+	[[ "$output" =~ \"id\":\"(P[0-9]+)\" ]]
+
+	run "$BATS_TEST_DIRNAME"/../tools/wb-cli label "${BASH_REMATCH[1]}"
+	[ "$status" -eq 0 ]
+	# XXX: wb-cli output seems to include carriage returns?
+	[[ "$output" == "$label"* ]]
+}

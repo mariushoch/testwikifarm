@@ -1,0 +1,9 @@
+{
+  "instance": "http://wikidatawiki.mediawiki.mwdd.localhost:8080",
+  "credentials": {
+    "http://wikidatawiki.mediawiki.mwdd.localhost:8080": {
+      "username": "Admin",
+      "password": "mwddpassword"
+    }
+  }
+}

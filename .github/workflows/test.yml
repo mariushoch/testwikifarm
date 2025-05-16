@@ -9,7 +9,7 @@ jobs:
       - name: Install shellcheck
         run: sudo apt-get -y install shellcheck
       - name: Run shellcheck
-        run: shellcheck *.sh test/*.sh test/*.bats
+        run: shellcheck *.sh test/*.sh test/*.bats tools/wb-cli
   run_tests:
     runs-on: ubuntu-latest
     steps:

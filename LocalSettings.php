@@ -11,6 +11,7 @@ wfLoadSkin( 'MinervaNeue' );
 wfLoadExtension('AntiSpoof');
 wfLoadExtension('Scribunto');
 wfLoadExtension( 'MobileFrontend' );
+wfLoadExtension( 'BetaFeatures' );
 
 if ( $wgDBname === 'dewiki' ) {
 	$wgLanguageCode = 'de';

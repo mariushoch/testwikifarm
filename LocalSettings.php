@@ -1,10 +1,11 @@
 <?php
 require_once '/mwdd/MwddSettings.php';
 
-$wgDebugToolbar = true;
+$wgDebugToolbar = false;
 require_once "$IP/includes/DevelopmentSettings.php";
 error_reporting( ~E_DEPRECATED );
 $wgMainCacheType = CACHE_MEMCACHED;
+$wgUseInstantCommons = true;
 
 wfLoadSkin('Vector');
 wfLoadSkin( 'MinervaNeue' );
@@ -87,6 +88,9 @@ $wgWBRepoSettings['siteLinkGroups'] = $wgWBClientSettings['siteLinkGroups'];
 $wgWBRepoSettings['specialSiteLinkGroups'] = $wgWBClientSettings['specialSiteLinkGroups'];
 $wgWBRepoSettings['localClientDatabases'] = array_combine( $wgLocalDatabases, $wgLocalDatabases );
 $wgWBRepoSettings['tmpEnableMulLanguageCode'] = true;
+$wgWBRepoSettings['tmpEnableMobileEditingUIBetaFeature'] = true;
+$wgWBRepoSettings['tmpMobileEditingUI'] = true;
+$wgWBRepoSettings['tmpEnableScopedTypeaheadSearch'] = true;
 $wgWBClientSettings['repoDatabase'] = $repoDatabase;
 $wgWBClientSettings['injectRecentChanges'] = true;
 $entitySources = [

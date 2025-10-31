@@ -5,4 +5,4 @@ if ! command -v "$pocker" >/dev/null 2>&1; then
 	pocker=docker
 fi
 
-"$pocker" run --network=host --rm -t -v "$(dirname "$0")/wb-cli.config.json:/root/.config/wikibase-cli/config.json:Z" docker.io/maxlath/wikibase-cli:latest "$@"
+"$pocker" run --network=host --rm -t -v "$(realpath "$(dirname "$0")")/wb-cli.config.json:/root/.config/wikibase-cli/config.json:Z" docker.io/maxlath/wikibase-cli:latest "$@"

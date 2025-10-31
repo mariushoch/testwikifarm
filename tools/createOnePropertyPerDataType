@@ -1,0 +1,11 @@
+#!/bin/bash
+
+data_types="$(curl -s 'http://wikidatawiki.mediawiki.mwdd.localhost:8080/w/api.php?action=paraminfo&modules=wbformatvalue&format=json' | jq -r '.paraminfo.modules[0].parameters.[] | select(.name=="datatype").type[]')"
+
+for data_type in $data_types; do
+	# 2025-10: These appear unsupported by wb-cli?!
+	[ "$data_type" == "wikibase-sense" ] && continue
+	[ "$data_type" == "entity-schema" ] && continue
+	label="$data_type #$RANDOM"
+	"$(dirname "$0")"/wb-cli create-entity '{ "type": "property", "datatype": "'"$data_type"'", "labels": { "en": "'"$label"'" } }'
+done

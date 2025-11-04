@@ -12,3 +12,8 @@ export MW_SCRIPT_PATH=/w
 export MEDIAWIKI_USER=Admin
 export MEDIAWIKI_PASSWORD=mwddpassword
 ```
+
+# Activating Xdebug
+For web requests set the `XDEBUG_SESSION_START=some_session_name` `GET` parameter [(further info)](https://xdebug.org/docs/step_debug#manual-init).
+
+For CLI scripts use `XDEBUG_SESSION=1 php test.php` (inside the MediaWiki container) [(see also)](https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#Triggering_for_requests).

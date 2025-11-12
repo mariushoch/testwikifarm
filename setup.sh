@@ -51,6 +51,14 @@ mw docker mediawiki install --dbtype mysql --dbname=enwiki
 mw docker mediawiki install --dbtype mysql --dbname=metawiki
 mw docker mediawiki install --dbtype mysql --dbname=wikidatawiki
 
+# Create an automatic jobrunner and add all sites
+mw docker mediawiki jobrunner create
+mw docker mediawiki jobrunner add-site dewiki
+mw docker mediawiki jobrunner add-site enwiki
+mw docker mediawiki jobrunner add-site metawiki
+mw docker mediawiki jobrunner add-site wikidatawiki
+mw docker mediawiki jobrunner start
+
 # Do the CentralAuth migrations:
 mw docker mediawiki foreachwiki CentralAuth:migratePass0
 mw docker mediawiki mwscript CentralAuth:migratePass1 -- --wiki metawiki # This only needs to run once

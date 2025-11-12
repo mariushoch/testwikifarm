@@ -77,3 +77,12 @@ teardown() {
 	# XXX: wb-cli output seems to include carriage returns?
 	[[ "$output" == "$label"* ]]
 }
+@test "Test jobrunner" {
+	# The other tests will trigger jobs, so we don't need to do that here.
+	totalJobs=$(("$(mw docker mediawiki foreachwiki showJobs | grep -oP '(?<=[[:space:]])[0-9]+' | paste -s -d+)"))
+	if [ "$totalJobs" -ne 0 ]; then
+		sleep 15
+		totalJobs=$(("$(mw docker mediawiki foreachwiki showJobs | grep -oP '(?<=[[:space:]])[0-9]+' | paste -s -d+)"))
+	fi
+	[ "$totalJobs" -eq 0 ]
+}

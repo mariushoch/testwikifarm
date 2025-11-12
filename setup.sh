@@ -26,6 +26,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Scribunto || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension MobileFrontend || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension BetaFeatures || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension UniversalLanguageSelector || true
 
 # XDebug env, per https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#XDebug
 command -v ip >/dev/null && mw docker env set MEDIAWIKI_XDEBUG_CONFIG "client_host=$(ip route list default | grep -oP '(?<=src )[0-9\.]+')"

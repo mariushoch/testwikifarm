@@ -13,6 +13,7 @@ wfLoadExtension('AntiSpoof');
 wfLoadExtension('Scribunto');
 wfLoadExtension( 'MobileFrontend' );
 wfLoadExtension( 'BetaFeatures' );
+wfLoadExtension( 'UniversalLanguageSelector' );
 
 if ( $wgDBname === 'dewiki' ) {
 	$wgLanguageCode = 'de';

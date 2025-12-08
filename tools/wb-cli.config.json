@@ -1,7 +1,7 @@
 {
-  "instance": "http://wikidatawiki.mediawiki.mwdd.localhost:8080",
+  "instance": "http://wikidatawiki.mediawiki.local.wmftest.net:8080",
   "credentials": {
-    "http://wikidatawiki.mediawiki.mwdd.localhost:8080": {
+    "http://wikidatawiki.mediawiki.local.wmftest.net:8080": {
       "username": "Admin",
       "password": "mwddpassword"
     }

@@ -7,7 +7,7 @@ Clone MediaWiki and clone this repo into its extensions dir. Then create a relat
 # Environment for browser tests (for wikidatawiki)
 
 ```bash
-export MW_SERVER=http://wikidatawiki.mediawiki.mwdd.localhost:8080/
+export MW_SERVER=http://wikidatawiki.mediawiki.local.wmftest.net:8080/
 export MW_SCRIPT_PATH=/w
 export MEDIAWIKI_USER=Admin
 export MEDIAWIKI_PASSWORD=mwddpassword

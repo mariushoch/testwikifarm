@@ -70,17 +70,17 @@ mw docker mediawiki foreachwiki CirrusSearch:ForceSearchIndex.php -- --skipLinks
 mw docker mediawiki foreachwiki CirrusSearch:ForceSearchIndex.php -- --skipParse
 
 # Wikibase set up:
-mw docker mediawiki foreachwiki addSite -- --interwiki-id de --language de --pagepath "http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \
-	--filepath "http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1" dewiki wikipedia
-mw docker mediawiki foreachwiki addSite -- --interwiki-id en --language en --pagepath "http://enwiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \
-	--filepath "http://enwiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1" enwiki wikipedia
-mw docker mediawiki foreachwiki addSite -- --interwiki-id meta --language en --pagepath "http://metawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \
-	--filepath "http://metawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1" metawiki meta
-mw docker mediawiki foreachwiki addSite -- --interwiki-id wd --language en --pagepath "http://wikidatawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1" \
-	--filepath "http://wikidatawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1" wikidatawiki wikidata
+mw docker mediawiki foreachwiki addSite -- --interwiki-id de --language de --pagepath "http://dewiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1" \
+	--filepath "http://dewiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1" dewiki wikipedia
+mw docker mediawiki foreachwiki addSite -- --interwiki-id en --language en --pagepath "http://enwiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1" \
+	--filepath "http://enwiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1" enwiki wikipedia
+mw docker mediawiki foreachwiki addSite -- --interwiki-id meta --language en --pagepath "http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1" \
+	--filepath "http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1" metawiki meta
+mw docker mediawiki foreachwiki addSite -- --interwiki-id wd --language en --pagepath "http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1" \
+	--filepath "http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1" wikidatawiki wikidata
 
-mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('de', 'http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1', 'http://dewiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1', 'dewiki', 1, 0);"
-mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('en', 'http://enwiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1', 'http://enwiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1', 'enwiki', 1, 0);"
-mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('meta', 'http://metawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1', 'http://metawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1', 'metawiki', 1, 0);"
-mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('wd', 'http://wikidatawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/wiki/\$1', 'http://wikidatawiki.mediawiki.mwdd.localhost:$(mw docker env get PORT)/w/\$1', 'wikidatawiki', 1, 0);"
+mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('de', 'http://dewiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://dewiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'dewiki', 1, 0);"
+mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('en', 'http://enwiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://enwiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'enwiki', 1, 0);"
+mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('meta', 'http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'metawiki', 1, 0);"
+mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('wd', 'http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'wikidatawiki', 1, 0);"
 

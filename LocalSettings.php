@@ -30,10 +30,10 @@ $wgCentralAuthDatabase = 'centralauth';
 $wgVirtualDomainsMapping['virtual-centralauth'] = [ 'db' => $wgCentralAuthDatabase ];
 $wgCentralAuthSessionCacheType = CACHE_MEMCACHED;
 $wgCentralAuthAutoLoginWikis = [
-	'dewiki.mediawiki.mwdd.localhost:8080' => 'dewiki',
-	'enwiki.mediawiki.mwdd.localhost:8080' => 'enwiki',
-	'metawiki.mediawiki.mwdd.localhost:8080' => 'metawiki',
-	'wikidatawiki.mediawiki.mwdd.localhost:8080' => 'wikidatawiki' 
+	'dewiki.mediawiki.local.wmftest.net:8080' => 'dewiki',
+	'enwiki.mediawiki.local.wmftest.net:8080' => 'enwiki',
+	'metawiki.mediawiki.local.wmftest.net:8080' => 'metawiki',
+	'wikidatawiki.mediawiki.local.wmftest.net:8080' => 'wikidatawiki'
 ];
 $wgCentralAuthLoginWiki = 'metawiki';
 $wgLocalDatabases = array_values( $wgCentralAuthAutoLoginWikis );
@@ -42,16 +42,16 @@ $wgConf->suffixes = [ 'wiki' ];
 $wgConf->localVHosts = [ 'localhost' ];
 $wgConf->settings = [
 	'wgServer' => [
-		'dewiki' => "//dewiki.mediawiki.mwdd.localhost:8080",
-		'enwiki' => "//enwiki.mediawiki.mwdd.localhost:8080",
-		'metawiki' => "//metawiki.mediawiki.mwdd.localhost:8080",
-		'wikidatawiki' => "//wikidatawiki.mediawiki.mwdd.localhost:8080",
+		'dewiki' => "//dewiki.mediawiki.local.wmftest.net:8080",
+		'enwiki' => "//enwiki.mediawiki.local.wmftest.net:8080",
+		'metawiki' => "//metawiki.mediawiki.local.wmftest.net:8080",
+		'wikidatawiki' => "//wikidatawiki.mediawiki.local.wmftest.net:8080",
 	],
 	'wgCanonicalServer' => [
-		'dewiki' => "http://dewiki.mediawiki.mwdd.localhost:8080",
-		'enwiki' => "http://enwiki.mediawiki.mwdd.localhost:8080",
-		'metawiki' => "http://metawiki.mediawiki.mwdd.localhost:8080",
-		'wikidatawiki' => "http://wikidatawiki.mediawiki.mwdd.localhost:8080",
+		'dewiki' => "http://dewiki.mediawiki.local.wmftest.net:8080",
+		'enwiki' => "http://enwiki.mediawiki.local.wmftest.net:8080",
+		'metawiki' => "http://metawiki.mediawiki.local.wmftest.net:8080",
+		'wikidatawiki' => "http://wikidatawiki.mediawiki.local.wmftest.net:8080",
 	],
 	'wgArticlePath' => [
 		// Same on all wikis
@@ -59,7 +59,7 @@ $wgConf->settings = [
 	],
 ];
 $wgCrossSiteAJAXdomains = [
-	'*.mediawiki.mwdd.localhost:8080'
+	'*.mediawiki.local.wmftest.net:8080'
 ];
 
 /**
@@ -102,7 +102,7 @@ $entitySources = [
 			'lexeme' => 146,
 		],
 		'repoDatabase' => 'wikidatawiki',
-		'baseUri' => 'http://wikidatawiki.mediawiki.mwdd.localhost:8080/entity/',
+		'baseUri' => 'http://wikidatawiki.mediawiki.local.wmftest.net:8080/entity/',
 		'rdfNodeNamespacePrefix' => 'wd',
 		'rdfPredicateNamespacePrefix' => '',
 		'interwikiPrefix' => 'wd',

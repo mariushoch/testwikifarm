@@ -9,14 +9,8 @@ mw docker mysql create --no-interaction
 # Create the Memcached container
 mw docker memcached create --no-interaction
 
-# Per https://phabricator.wikimedia.org/T410269#11378593
-mw docker elasticsearch image set 'docker-registry.wikimedia.org/repos/search-platform/cirrussearch-opensearch-image:v1.3.20-12'
-
-# Create the ElasticSearch container
-mw docker elasticsearch create --no-interaction
-
-# The container has been created already, so we can remove the overwrite again (and leave the state clean for further updates)
-mw docker elasticsearch image reset
+# Create the opensearch (ex ElasticSearch) container
+mw docker opensearch create --no-interaction
 
 # Download extensions and skins
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --skin MinervaNeue || true

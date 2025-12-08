@@ -112,7 +112,7 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
 $wgLexemeEnableDataTransclusion = true;
 
-if(gethostbyname('elasticsearch') !== 'elasticsearch') {
+if(gethostbyname('opensearch') !== 'opensearch') {
 	wfLoadExtension( 'Elastica' );
 	wfLoadExtension( 'CirrusSearch' );
 	$wgSearchType = 'CirrusSearch';

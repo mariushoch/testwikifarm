@@ -27,6 +27,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension MobileFrontend || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension BetaFeatures || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension UniversalLanguageSelector || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseQualityConstraints || true
 
 # XDebug env, per https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#XDebug
 mw docker env set MEDIAWIKI_XDEBUG_MODE "develop,debug"
@@ -84,3 +85,7 @@ mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES
 mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('meta', 'http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://metawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'metawiki', 1, 0);"
 mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES('wd', 'http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/wiki/\$1', 'http://wikidatawiki.mediawiki.local.wmftest.net:$(mw docker env get PORT)/w/\$1', 'wikidatawiki', 1, 0);"
 
+# WikibaseQualityConstraints
+echo '<?php' > "$(dirname "$0")/LocalSettings.WikibaseQualityConstraints.php"
+mw docker mediawiki mwscript WikibaseQualityConstraints:ImportConstraintEntities -- --wiki wikidatawiki >> "$(dirname "$0")/LocalSettings.WikibaseQualityConstraints.php"
+mw docker mediawiki mwscript WikibaseQualityConstraints:ImportConstraintStatements -- --wiki wikidatawiki

@@ -79,6 +79,10 @@ if ( $wgDBname === $repoDatabase ) {
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
 	$wgWBClientSettings['siteGroup'] = 'wikidata';
+	wfLoadExtension( 'WikibaseQualityConstraints' );
+	if ( file_exists( __DIR__ . '/LocalSettings.WikibaseQualityConstraints.php' ) ) {
+		require_once __DIR__ . '/LocalSettings.WikibaseQualityConstraints.php';
+	}
 } elseif ( $wgDBname === 'metawiki' ) {
 	$wgWBClientSettings['siteGroup'] = 'meta';
 }

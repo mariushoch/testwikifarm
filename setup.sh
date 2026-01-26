@@ -87,5 +87,6 @@ mw docker mediawiki foreachwiki sql.php -- --query "INSERT INTO interwiki VALUES
 
 # WikibaseQualityConstraints
 echo '<?php' > "$(dirname "$0")/LocalSettings.WikibaseQualityConstraints.php"
-mw docker mediawiki mwscript WikibaseQualityConstraints:ImportConstraintEntities -- --wiki wikidatawiki >> "$(dirname "$0")/LocalSettings.WikibaseQualityConstraints.php"
+# XXX: `mw docker mediawiki mwscript` passes stderr to stdout :S
+mw docker mediawiki mwscript WikibaseQualityConstraints:ImportConstraintEntities -- --wiki wikidatawiki | grep ^\$wg >> "$(dirname "$0")/LocalSettings.WikibaseQualityConstraints.php"
 mw docker mediawiki mwscript WikibaseQualityConstraints:ImportConstraintStatements -- --wiki wikidatawiki

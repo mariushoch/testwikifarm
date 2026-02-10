@@ -84,12 +84,12 @@ teardown() {
 	run --separate-stderr "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
 		'{ "type": "property", "datatype": "globe-coordinate", "labels": { "en": "Wikibase Kartographer test property #'$RANDOM'" } }'
 	[ "$status" -eq 0 ]
-	propertyId="$(echo "$output" | grep ^{ | jq -r '.entity.id')"
+	propertyId="$(echo "$output" | grep '^{' | jq -r '.entity.id')"
 
 	run --separate-stderr "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
 		'{ "type": "item", "labels": { "en": "Wikibase Kartographer test #'$RANDOM'" } }'
 	[ "$status" -eq 0 ]
-	itemId="$(echo "$output" | grep ^{ | jq -r '.entity.id')"
+	itemId="$(echo "$output" | grep '^{' | jq -r '.entity.id')"
 
 	"$BATS_TEST_DIRNAME"/../tools/wb-cli add-claim "$itemId" "$propertyId" \
 		'{"latitude":40.748333333333335,"longitude":-73.98555555555555,"altitude":null,"precision":0.0002777777777777778,"globe":"http://www.wikidata.org/entity/Q2"}'

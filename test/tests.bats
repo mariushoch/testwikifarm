@@ -1,5 +1,7 @@
 #!/bin/bats
 
+bats_require_minimum_version 1.5.0
+
 teardown() {
 	# Print last output from bats' run
 	# bats will not output anything, if the test succeeded.
@@ -79,12 +81,12 @@ teardown() {
 }
 @test "Wikibase Kartographer" {
 	local propertyId itemId
-	run "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
+	run --separate-stderr "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
 		'{ "type": "property", "datatype": "globe-coordinate", "labels": { "en": "Wikibase Kartographer test property #'$RANDOM'" } }'
 	[ "$status" -eq 0 ]
 	propertyId="$(echo "$output" | jq -r '.entity.id')"
 
-	run "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
+	run --separate-stderr "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
 		'{ "type": "item", "labels": { "en": "Wikibase Kartographer test #'$RANDOM'" } }'
 	[ "$status" -eq 0 ]
 	itemId="$(echo "$output" | jq -r '.entity.id')"

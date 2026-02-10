@@ -77,7 +77,27 @@ teardown() {
 	# XXX: wb-cli output seems to include carriage returns?
 	[[ "$output" == "$label"* ]]
 }
+@test "Wikibase Kartographer" {
+	local propertyId itemId
+	run "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
+		'{ "type": "property", "datatype": "globe-coordinate", "labels": { "en": "Wikibase Kartographer test property #'$RANDOM'" } }'
+	[ "$status" -eq 0 ]
+	propertyId="$(echo "$output" | jq -r '.entity.id')"
+
+	run "$BATS_TEST_DIRNAME"/../tools/wb-cli create-entity \
+		'{ "type": "item", "labels": { "en": "Wikibase Kartographer test #'$RANDOM'" } }'
+	[ "$status" -eq 0 ]
+	itemId="$(echo "$output" | jq -r '.entity.id')"
+
+	"$BATS_TEST_DIRNAME"/../tools/wb-cli add-claim "$itemId" "$propertyId" \
+		'{"latitude":40.748333333333335,"longitude":-73.98555555555555,"altitude":null,"precision":0.0002777777777777778,"globe":"http://www.wikidata.org/entity/Q2"}'
+
+	run curl -s "http://wikidatawiki.mediawiki.local.wmftest.net:8080/wiki/Item:$itemId"
+	[ "$status" -eq 0 ]
+	[[ "$output" =~ \<img[^\>]+src=\"[^\"]+maps.wikimedia.org ]]
+}
 @test "Test jobrunner" {
+	local totalJobs
 	# The other tests will trigger jobs, so we don't need to do that here.
 	totalJobs=$(("$(mw docker mediawiki foreachwiki showJobs | grep -oP '(?<=[[:space:]])[0-9]+' | paste -s -d+)"))
 	if [ "$totalJobs" -ne 0 ]; then

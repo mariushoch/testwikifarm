@@ -28,6 +28,8 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension BetaFeatures || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension UniversalLanguageSelector || true
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension WikibaseQualityConstraints || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension JsonConfig || true
+mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Kartographer || true
 
 # XDebug env, per https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#XDebug
 mw docker env set MEDIAWIKI_XDEBUG_MODE "develop,debug"

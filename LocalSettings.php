@@ -15,6 +15,10 @@ wfLoadExtension( 'MobileFrontend' );
 wfLoadExtension( 'BetaFeatures' );
 wfLoadExtension( 'UniversalLanguageSelector' );
 
+wfLoadExtension( 'JsonConfig' );
+wfLoadExtension( 'Kartographer' );
+$wgKartographerMapServer = 'https://maps.wikimedia.org';
+
 if ( $wgDBname === 'dewiki' ) {
 	$wgLanguageCode = 'de';
 }
@@ -115,6 +119,11 @@ $entitySources = [
 $wgWBClientSettings['entitySources'] = $entitySources;
 $wgWBClientSettings['itemAndPropertySourceName'] = 'wikidata';
 $wgLexemeEnableDataTransclusion = true;
+
+if ( isset( $wgKartographerMapServer ) && $wgKartographerMapServer ) {
+	$wgWBRepoSettings['useKartographerGlobeCoordinateFormatter'] = true;
+	$wgWBClientSettings['useKartographerGlobeCoordinateFormatter'] = true;
+}
 
 if(gethostbyname('opensearch') !== 'opensearch') {
 	wfLoadExtension( 'Elastica' );

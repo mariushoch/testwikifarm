@@ -32,7 +32,7 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 mw docker mediawiki get-code --use-github --gerrit-interaction-type http --extension Kartographer || true
 
 # XDebug env, per https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#XDebug
-mw docker env set MEDIAWIKI_XDEBUG_MODE "develop,debug"
+mw docker env set MEDIAWIKI_XDEBUG_MODE "debug"
 # The gateway will be the container host (where we expect the Xdebug client to listen) -- https://xdebug.org/docs/all_settings#client_host
 mw docker env set MEDIAWIKI_XDEBUG_CONFIG "client_host=xdebug://gateway"
 

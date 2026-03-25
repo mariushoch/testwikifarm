@@ -33,7 +33,8 @@ mw docker mediawiki get-code --use-github --gerrit-interaction-type http --exten
 
 # XDebug env, per https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/MediaWiki#XDebug
 mw docker env set MEDIAWIKI_XDEBUG_MODE "develop,debug"
-command -v ip >/dev/null && mw docker env set MEDIAWIKI_XDEBUG_CONFIG "client_host=$(ip route list default | grep -oP '(?<=src )[0-9\.]+')"
+# The gateway will be the container host (where we expect the Xdebug client to listen) -- https://xdebug.org/docs/all_settings#client_host
+mw docker env set MEDIAWIKI_XDEBUG_CONFIG "client_host=xdebug://gateway"
 
 # Create the MediaWiki container, run composer update
 mw docker mediawiki create --no-interaction

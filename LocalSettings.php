@@ -39,7 +39,10 @@ $wgCentralAuthAutoLoginWikis = [
 	'metawiki.mediawiki.local.wmftest.net:8080' => 'metawiki',
 	'wikidatawiki.mediawiki.local.wmftest.net:8080' => 'wikidatawiki'
 ];
-$wgCentralAuthLoginWiki = 'metawiki';
+if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+	# 2026-03: This break Wikibase repo special page tests, e.g. SpecialNewItemTest
+	$wgCentralAuthLoginWiki = 'metawiki';
+}
 $wgLocalDatabases = array_values( $wgCentralAuthAutoLoginWikis );
 $wgConf->wikis = $wgLocalDatabases;
 $wgConf->suffixes = [ 'wiki' ];

@@ -42,6 +42,7 @@ mw docker env set MEDIAWIKI_XDEBUG_CONFIG "client_host=xdebug://gateway"
 mw docker mediawiki create --no-interaction
 mw docker mediawiki exec -- test -f /var/www/html/w/composer.local.json || mw docker mediawiki exec -- cp /var/www/html/w/composer.local.json-sample /var/www/html/w/composer.local.json
 mw docker mediawiki composer update
+read
 
 # Create the CentralAuth database and tables:
 mw docker mediawiki exec -- /wait-for-it.sh -h mysql -p 3306
@@ -53,10 +54,10 @@ mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -
 mw docker mysql mysql -- --database centralauth -e "$(mw docker mediawiki exec -- grep -ozP '(?s)CREATE TABLE .{0,10}objectcache.*?;' /var/www/html/w/sql/mysql/tables-generated.sql | tr -d '\000' )"
 
 # Create the wikis:
-mw docker mediawiki install --dbtype mysql --dbname=dewiki
-mw docker mediawiki install --dbtype mysql --dbname=enwiki
-mw docker mediawiki install --dbtype mysql --dbname=metawiki
-mw docker mediawiki install --dbtype mysql --dbname=wikidatawiki
+mw docker mediawiki install --no-interaction --dbtype mysql --dbname=dewiki
+mw docker mediawiki install --no-interaction --dbtype mysql --dbname=enwiki
+mw docker mediawiki install --no-interaction --dbtype mysql --dbname=metawiki
+mw docker mediawiki install --no-interaction --dbtype mysql --dbname=wikidatawiki
 
 # Create an automatic jobrunner and add all sites
 mw docker mediawiki jobrunner create
